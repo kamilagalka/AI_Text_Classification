@@ -8,7 +8,7 @@ import src.utils as utils
 
 logging.basicConfig(level=logging.INFO)
 
-ALL_DATA_FILE_PATH = "all_data_no_stop_words.csv"
+ALL_DATA_FILE_PATH = "../preprocessed_data/all_data_cleared.csv"
 
 
 def classes_occurance_frequency(data_df: pd.DataFrame, column_name: str) -> dict[int, int]:
@@ -66,9 +66,9 @@ if __name__ == '__main__':
     # for text in all_data['subj']:
     #     no_stop_words.append(utils.remove_stop_words(text))
     #
-    # all_data['subj_no_stop_words'] = no_stop_words
+    # all_data['cleaned'] = no_stop_words
 
-    classes_word_counts = _get_classes_words_count(all_data, 'label', 'subj_no_stop_words')
+    classes_word_counts = _get_classes_words_count(all_data, 'label', 'cleaned')
 
     most_popular_words = classes_most_popular_words(classes_word_counts, num_of_words=20)
     logging.info(f"Classes most popular words in available data: {most_popular_words}")

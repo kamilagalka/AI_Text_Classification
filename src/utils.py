@@ -1,12 +1,20 @@
+import logging
+
+import pandas as pd
 from nltk.corpus import stopwords
-from spacy.lang.en import English
+from nltk.stem import SnowballStemmer
+
+logging.basicConfig(level=logging.DEBUG)
 
 cachedStopWords = stopwords.words("english")
 
 
-def remove_stop_words(text):
-    nlp = English()
-    my_doc = nlp(text)
-    token_list = [token.text for token in my_doc]
-    filtered_sentence = [word for word in token_list if not nlp.vocab[word].is_stop]
-    return " ".join(filtered_sentence)
+def clear_data(data: pd.DataFrame, cleaned_column_name: str) -> pd.DataFrame:
+    logging.debug("Starting data clearing")
+    stemmer = SnowballStemmer('english')
+    words = stopwords.words('english')
+    data['cleaned'] = data[cleaned_column_name].apply(
+        lambda line: ' '.join([stemmer.stem(token) for token in line.split() if token not in words]))
+    logging.debug("Finished data clearing")
+
+    return data

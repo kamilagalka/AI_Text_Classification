@@ -46,13 +46,9 @@ def read_all_data_remove_stop_words():
         author_df = get_df_from_files(subdir_path)
         all_data_df = pd.concat([all_data_df, author_df])
 
-    no_stop_words = []
-    for text in all_data_df['subj']:
-        no_stop_words.append(utils.remove_stop_words(text))
+    all_data_df = utils.clear_data(all_data_df, 'subj')
 
-    all_data_df['subj_no_stop_words'] = no_stop_words
-
-    all_data_df.to_csv('all_data_no_stop_words.csv', index=False)
+    all_data_df.to_csv('all_data_cleared.csv', index=False)
 
 
 if __name__ == '__main__':
