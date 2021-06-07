@@ -4,8 +4,6 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-import src.utils as utils
-
 logging.basicConfig(level=logging.INFO)
 
 ALL_DATA_FILE_PATH = "../preprocessed_data/all_data_cleared.csv"
@@ -62,12 +60,6 @@ if __name__ == '__main__':
     avg_length = classes_avg_length(all_data, 'label', 'subj')
     logging.info(f"Classes avg length in available data: {avg_length}")
 
-    # no_stop_words = []
-    # for text in all_data['subj']:
-    #     no_stop_words.append(utils.remove_stop_words(text))
-    #
-    # all_data['cleaned'] = no_stop_words
-
     classes_word_counts = _get_classes_words_count(all_data, 'label', 'cleaned')
 
     most_popular_words = classes_most_popular_words(classes_word_counts, num_of_words=20)
@@ -81,9 +73,3 @@ if __name__ == '__main__':
         plt.bar(*zip(*words_count.items()))
         plt.xticks(rotation=45)
         plt.show()
-    #
-    # for label, words_count in least_popular_words.items():
-    #     plt.title(f"Class {label} - least popular words")
-    #     plt.bar(*zip(*words_count.items()))
-    #     plt.xticks(rotation=45)
-    #     plt.show()
