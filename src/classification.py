@@ -22,7 +22,7 @@ def train_and_evaluate(X: pd.DataFrame, y: pd.DataFrame, classifier, cross_valid
         ('vect', TfidfVectorizer()),
         ('clf', classifier),
     ])
-    text_clf.set_params()
+
     results = cross_val_score(text_clf, X, y, cv=cross_validation)
     logging.info(f"Cross validation scores: {results}")
 
